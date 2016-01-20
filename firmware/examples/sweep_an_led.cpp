@@ -2,7 +2,7 @@
 // (Arduino) or D0 (Particle Core) up from off to full brightness and back
 // down.
 
-#include "ticker.h"
+#include "ticker/ticker.h"
 
 #if defined(ARDUINO)
 int ledpin = 9;
