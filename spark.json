@@ -3,5 +3,5 @@
   "author": "Kyle Marsh <spark@quixoticflame.net>",
   "license": "MIT",
   "version": "0.0.10",
-  "description": "Manage RGB pixels over time from Particle"
+  "description": "Manage RGB pixels over time from Particle or Arduino"
 }

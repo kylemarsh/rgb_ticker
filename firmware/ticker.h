@@ -30,7 +30,9 @@ class Ticker
 {
   public:
     Ticker(void (*tick_func)(Ticker *t, unsigned long tick), int num_targets, int speed_adjust, int offset);
+    Ticker(const Ticker& other);
     ~Ticker();
+	Ticker &operator=(const Ticker &other);
 
     int
       num_targets,

@@ -27,14 +27,41 @@ Ticker::Ticker(void (*tick_func)(Ticker *t, unsigned long tick), int num_targets
   num_targets(num_targets), speed_adjust(speed_adjust),
   offset(offset), targets(NULL), tick_func(tick_func)
 {
-  if ((targets = (TickerRgb *)malloc(num_targets * 6))) {
-    memset(targets, 0, num_targets * 6);
-  }
+	targets = new TickerRgb[num_targets];
+}
+
+Ticker::Ticker(const Ticker& other) :
+  num_targets(other.num_targets), speed_adjust(other.speed_adjust),
+  offset(other.offset), targets(NULL), tick_func(other.tick_func)
+{
+	targets = new TickerRgb[num_targets];
+	for (int i = 0; i < other.num_targets; ++i) {
+		targets[i] = other.targets[i];
+	}
 }
 
 Ticker::~Ticker()
 {
-  if (targets) free(targets);
+  delete [] targets;
+}
+
+Ticker& Ticker::operator=(const Ticker &other)
+{
+	if (this != &other) {
+		TickerRgb *new_targets = new TickerRgb[other.num_targets];
+		for (int i = 0; i < other.num_targets; ++i) {
+			new_targets[i] = other.targets[i];
+		}
+		delete [] targets;
+
+		targets = new_targets;
+		num_targets = other.num_targets;
+		speed_adjust = other.speed_adjust;
+		current = other.current;
+		tick_func = other.tick_func;
+	}
+
+	return *this;
 }
 
 /*
